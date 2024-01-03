@@ -1,10 +1,9 @@
-import {TodoModel} from "../models/todos.js";
-
-class TodosController {
+import {DoneTodoModel} from "../models/doneTodos.js";
+class DoneTodosController {
     async create(req, res) {
         try {
             const {author, text} = req.body
-            const post = await TodoModel.create({author, text})
+            const post = await DoneTodoModel.create({author, text})
             res.status(200).json(post)
         } catch(error) {
             res.status(500).json(error)
@@ -12,7 +11,7 @@ class TodosController {
     }
     async getAll(req, res) {
         try {
-            const allTodos = await TodoModel.find()
+            const allTodos = await DoneTodoModel.find()
             res.status(200).json(allTodos)
             return allTodos
         } catch(error) {
@@ -22,7 +21,7 @@ class TodosController {
     async getOne(req, res) {
         try {
             const {id} = req.params
-            const todo = await TodoModel.findById(id)
+            const todo = await DoneTodoModel.findById(id)
             res.status(200).json(req.params)
             return todo
         } catch(error) {
@@ -35,7 +34,7 @@ class TodosController {
             if (!todo._id) {
                 res.status(400).json(`todo id is required`)
             }
-            const updatedTodo = await TodoModel.findByIdAndUpdate(todo._id, todo, {new: true})
+            const updatedTodo = await DoneTodoModel.findByIdAndUpdate(todo._id, todo, {new: true})
             return res.json(`todo with id ${todo._id} updated successfully`)
             // return res.json(updatedTodo)
         } catch(error) {
@@ -46,7 +45,7 @@ class TodosController {
         try {
             console.log(req.params)
             const {id} = req.params
-            const todo = await TodoModel.findByIdAndDelete(id)
+            const todo = await DoneTodoModel.findByIdAndDelete(id)
             res.status(200).json(`todo with id ${id} deleted successfully`)
         } catch(error) {
             res.status(500).json(error)
@@ -54,4 +53,4 @@ class TodosController {
     }
 }
 
-export default new TodosController()
+export default new DoneTodosController()
