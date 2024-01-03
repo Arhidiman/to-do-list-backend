@@ -8,5 +8,6 @@ doneToDoRouter.get('/done-todos', DoneTodosController.getAll)
 doneToDoRouter.get('/done-todos/:id', DoneTodosController.getOne)
 doneToDoRouter.put('/done-todos', DoneTodosController.update)
 doneToDoRouter.delete('/done-todos:id', DoneTodosController.delete)
+doneToDoRouter.delete('/done-todos', DoneTodosController.deleteAll)
 
 export default doneToDoRouter

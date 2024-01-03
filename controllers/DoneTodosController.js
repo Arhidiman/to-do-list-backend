@@ -1,10 +1,12 @@
 import {DoneTodoModel} from "../models/doneTodos.js";
 class DoneTodosController {
     async create(req, res) {
+        // console.log('create done-todo', req.body)
         try {
             const {author, text} = req.body
-            const post = await DoneTodoModel.create({author, text})
-            res.status(200).json(post)
+            const todo = await DoneTodoModel.create({author, text})
+            console.log('done todo', todo)
+            res.status(200).json(todo)
         } catch(error) {
             res.status(500).json(error)
         }
@@ -47,6 +49,17 @@ class DoneTodosController {
             const {id} = req.params
             const todo = await DoneTodoModel.findByIdAndDelete(id)
             res.status(200).json(`todo with id ${id} deleted successfully`)
+        } catch(error) {
+            res.status(500).json(error)
+        }
+    }
+
+    async deleteAll(req, res) {
+        try {
+            console.log(req.params)
+            const {id} = req.params
+            await DoneTodoModel.deleteMany()
+            res.status(200).json(`All done todos deleted successfully`)
         } catch(error) {
             res.status(500).json(error)
         }
