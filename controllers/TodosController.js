@@ -5,6 +5,7 @@ class TodosController {
         try {
             const {author, text} = req.body
             const post = await TodoModel.create({author, text})
+            console.log(post)
             res.status(200).json(post)
         } catch(error) {
             console.log(error)
