@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "node index.js --host=http://5.35.92.236/ --port=5000",
     "dev": "nodemon index.js"
   },
   "author": "",
