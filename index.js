@@ -2,7 +2,8 @@ import express from 'express'
 import mongoose from "mongoose"
 import cors from 'cors'
 import toDoRouter from "./router/toDoRouter.js"
-import doneToDoRouter from "./router/doneToDoRouter.js";
+import doneToDoRouter from "./router/doneToDoRouter.js"
+import usersRouter from "./router/usersRouter.js";
 
 const PORT = 5000
 const DB_URL = 'mongodb://127.0.0.1/to-do-list-db'
@@ -13,6 +14,7 @@ app.use(express.json())
 app.use(cors())
 app.use('/api', toDoRouter)
 app.use('/api', doneToDoRouter)
+app.use('/api', usersRouter)
 
 const startApp = async () => {
     try {
