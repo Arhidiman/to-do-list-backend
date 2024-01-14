@@ -45,10 +45,23 @@ class UsersController {
     }
     async delete(req, res) {
         try {
-            console.log(req.params)
             const {id} = req.params
             const user = await UserModel.findByIdAndDelete(id)
             res.status(200).json(`user with id ${id} deleted successfully`)
+        } catch(error) {
+            res.status(500).json(error)
+        }
+    }
+    async signIn(req, res) {
+        try {
+            const {name, password} = req.body
+            const user = await UserModel.findOne({name, password})
+            if(user) {
+                res.status(200).json(user)
+            } else {
+                res.status(401).json('Неверный логин или пароль')
+            }
+            return user
         } catch(error) {
             res.status(500).json(error)
         }
