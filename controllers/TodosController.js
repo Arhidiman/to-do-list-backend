@@ -54,6 +54,16 @@ class TodosController {
             res.status(500).json(error)
         }
     }
+    async getUserTodos(req, res) {
+        const {author} = req.body
+        try {
+            const allUsersTodos = await TodoModel.find({author})
+            res.status(200).json(allUsersTodos)
+            return allUsersTodos
+        } catch(error) {
+            res.status(500).json(error)
+        }
+    }
 }
 
 export default new TodosController()
