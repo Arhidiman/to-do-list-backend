@@ -3,10 +3,10 @@ import {TodoModel} from "../models/todos.js";
 class TodosController {
     async create(req, res) {
         try {
-            const {author, text} = req.body
-            const post = await TodoModel.create({author, text})
-            console.log(post)
-            res.status(200).json(post)
+            const {author, text, userId} = req.body
+            const todo = await TodoModel.create({author, text, userId})
+            console.log(todo)
+            res.status(200).json(todo)
         } catch(error) {
             console.log(error)
             res.status(500).json(error)
@@ -55,9 +55,10 @@ class TodosController {
         }
     }
     async getUserTodos(req, res) {
-        const {author} = req.body
+        const {userId} = req.query
+        console.log(req.query)
         try {
-            const allUsersTodos = await TodoModel.find({author})
+            const allUsersTodos = await TodoModel.find({userId})
             res.status(200).json(allUsersTodos)
             return allUsersTodos
         } catch(error) {
